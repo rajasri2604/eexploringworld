@@ -37,7 +37,7 @@ const Footer = () => {
 <div id="contact" className="space-y-3 scroll-mt-28">
 
           <h3 className="text-lg font-bold">Contact Us</h3>
-          <p className="flex items-center gap-2"><FaPhone /> 90845 39815</p>
+          <p className="flex items-center gap-2"><FaPhone /> 99447 51535</p>
           <p className="flex items-center gap-2"><FaEnvelope /> journeo@gmail.com</p>
           <p className="flex items-center gap-2"><FaMapMarkerAlt /> Chennai, Tamil Nadu, India</p>
         </div>
