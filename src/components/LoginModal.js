@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginModal = ({ showModal, closeModal, onLogin }) => {
   const [isRegister, setIsRegister] = useState(false);
@@ -7,12 +8,11 @@ const LoginModal = ({ showModal, closeModal, onLogin }) => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const navigate = useNavigate();
 
   if (!showModal) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isRegister) {
@@ -25,21 +25,44 @@ const LoginModal = ({ showModal, closeModal, onLogin }) => {
         return;
       }
 
-      alert(`Registered successfully as ${name}`);
-      onLogin?.({ name }); // Call parent with user data
-      closeModal();
+      try {
+        const response = await axios.post('http://localhost:5000/api/auth/register', {
+          name,
+          email,
+          password,
+        });
+
+        alert('Registered successfully!');
+        localStorage.setItem('username', name);
+        onLogin?.({ name });
+        closeModal();
+        navigate('/home');
+      } catch (error) {
+        console.error(error);
+        alert(error.response?.data?.error || 'Registration failed');
+      }
     } else {
       if (!email || !password) {
         alert('Please enter email and password');
         return;
       }
 
-      // Simulate login and send name (mock)
-      const extractedName = email.split('@')[0]; // Use part before @ as mock name
-      alert('Login successful!');
-      onLogin?.({ name: extractedName });
-      closeModal();
-      navigate('/home');
+      try {
+        const response = await axios.post('http://localhost:5000/api/auth/login', {
+          email,
+          password,
+        });
+
+        const username = response.data.user.name;
+        alert('Login successful!');
+        localStorage.setItem('username', username);
+        onLogin?.({ name: username });
+        closeModal();
+        navigate('/home');
+      } catch (error) {
+        console.error(error);
+        alert(error.response?.data?.error || 'Login failed');
+      }
     }
   };
 
