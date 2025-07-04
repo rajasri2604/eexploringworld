@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import 'animate.css';
-import axios from 'axios';
 
 const destinations = [
   { name: 'Paris', image: '/images/paris.jpg' },
@@ -38,26 +37,11 @@ const HomePage = () => {
   const handleInputChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const bookingData = {
-        name: formData.name,
-        email: formData.email,
-        destination: selectedDestination,
-        payment: formData.payment,
-        date: formData.date,
-      };
-
-      const res = await axios.post('http://localhost:5000/api/bookings', bookingData);
-      console.log('Booking response:', res.data);
-      alert(`Booking confirmed for ${formData.name} to ${selectedDestination}!`);
-      setShowBooking(false);
-      setFormData({ name: '', email: '', payment: '', date: '' });
-    } catch (err) {
-      console.error('Booking error:', err);
-      alert('Booking failed. Please try again.');
-    }
+    alert(`Booking confirmed for ${formData.name} to ${selectedDestination}!`);
+    setShowBooking(false);
+    setFormData({ name: '', email: '', payment: '', date: '' });
   };
 
   return (
