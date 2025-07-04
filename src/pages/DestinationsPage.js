@@ -39,7 +39,7 @@ const destinations = [
   },
   {
     name: 'Kanyakumari, Tamil Nadu',
-    image: '/images/kanyakumari-sunrise.jpg',
+    image: '/images/kanyakumari.jpg',
     description: 'Southern tip of India, famous for sunrise, sunset, and Vivekananda Rock.',
     category: 'Coastal',
     rating: 4.8,
@@ -48,7 +48,7 @@ const destinations = [
   },
   {
     name: 'Yercaud, Tamil Nadu',
-    image: '/images/yercaud-hills.jpg',
+    image: '/images/yercaud.jpg',
     description: 'A quiet hill station with beautiful views and a peaceful lake.',
     category: 'Hill Station',
     rating: 4.5,
