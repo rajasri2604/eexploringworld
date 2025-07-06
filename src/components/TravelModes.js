@@ -18,40 +18,44 @@ const TravelModes = () => {
   };
 
   return (
-    <div className="mt-12 px-6 overflow-visible">
-      <h2 className="text-2xl font-bold text-center mb-6">Travel Modes to Reach These Places</h2>
+    <div className="mt-12 px-4 sm:px-6 overflow-visible">
+      <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
+        Travel Modes to Reach Destinations!
+      </h2>
 
-      <div className="relative max-w-6xl mx-auto overflow-visible">
+      <div className="relative mx-auto w-full max-w-6xl">
         <Carousel
           selectedItem={currentSlide}
           onChange={(index) => setCurrentSlide(index)}
           showThumbs={false}
           showStatus={false}
-          showIndicators={true} // 👈 Show dots
+          showIndicators={true}
           infiniteLoop
-          centerMode
-          centerSlidePercentage={33}
           autoPlay={false}
-          renderArrowPrev={() => null}
-          renderArrowNext={() => null}
+          swipeable
+          emulateTouch
+          centerMode={false} // ❌ disable fixed slide centering
         >
           {travelModes.map((mode, index) => (
-            <div key={index} className="p-4"> {/* 👈 Adds spacing between slides */}
-              <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center justify-center transition transform hover:scale-105">
+            <div key={index} className="flex justify-center px-4">
+              <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[40%] bg-white p-3 sm:p-4 rounded-lg shadow-md flex flex-col items-center justify-center transition transform hover:scale-105">
                 <img
                   src={mode.image}
                   alt={mode.name}
-                  className="w-full h-32 object-cover rounded-md mb-3"
+                  className="w-full h-auto max-h-64 object-cover rounded-md mb-3"
                 />
-                <div className="text-blue-700 font-semibold">{mode.name}</div>
+                <div className="text-blue-700 font-semibold text-sm sm:text-base">
+                  {mode.name}
+                </div>
               </div>
             </div>
           ))}
         </Carousel>
 
+        {/* Next button (visible on sm and up) */}
         <button
           onClick={handleNext}
-          className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-black hover:bg-blue-100 z-50"
+          className="hidden sm:flex absolute -right-10 top-1/2 transform -translate-y-1/2 bg-white w-10 h-10 rounded-full shadow-lg items-center justify-center text-black hover:bg-blue-100 z-50"
         >
           &#62;
         </button>
