@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const destinations = [
   {
@@ -59,6 +60,7 @@ const destinations = [
 
 const DestinationsPage = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const navigate = useNavigate();
 
   const handleViewMore = (place) => {
     setSelectedPlace(place);
@@ -79,6 +81,20 @@ const DestinationsPage = () => {
       {/* Destination Grid */}
       <section>
         <h2 className="text-2xl font-semibold mb-6 text-center">Popular Destinations</h2>
+
+        <section className="mt-12 text-center">
+          <h2 className="text-2xl font-bold mb-2">Ready to Pack Your Bags?</h2>
+          <p className="mb-4 text-gray-600">Explore. Discover. Travel.</p>
+          <button
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition text-lg"
+            onClick={() => navigate('/packages')}
+          >
+            Book Your Trip Now
+          </button>
+        </section>
+
+        <br />
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {destinations.map((place, index) => (
             <div
@@ -116,21 +132,16 @@ const DestinationsPage = () => {
         </ul>
       </section>
 
-      {/* CTA Section */}
-      <section className="mt-12 text-center">
-        <h2 className="text-2xl font-bold mb-2">Ready to Pack Your Bags?</h2>
-        <p className="mb-4 text-gray-600">Explore. Discover. Travel.</p>
-        <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition text-lg">
-          Book Your Trip Now
-        </button>
-      </section>
-
-      {/* Popup Modal */}
+      {/* Modal */}
       {selectedPlace && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl animate__animated animate__fadeIn">
             <h3 className="text-2xl font-bold mb-4 text-center">{selectedPlace.name}</h3>
-            <img src={selectedPlace.image} alt={selectedPlace.name} className="w-full h-48 object-cover rounded mb-4" />
+            <img
+              src={selectedPlace.image}
+              alt={selectedPlace.name}
+              className="w-full h-48 object-cover rounded mb-4"
+            />
             <p className="mb-2"><strong>Description:</strong> {selectedPlace.description}</p>
             <p className="mb-2"><strong>Category:</strong> {selectedPlace.category}</p>
             <p className="mb-2"><strong>Rating:</strong> ⭐ {selectedPlace.rating}</p>
