@@ -29,7 +29,7 @@ const TravelModes = () => {
           onChange={(index) => setCurrentSlide(index)}
           showThumbs={false}
           showStatus={false}
-          showIndicators={true}
+          showIndicators={false}
           infiniteLoop
           autoPlay={false}
           swipeable
